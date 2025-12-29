@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { mapPrismaError } from "../utils/mapPrismaError";
 import { prisma } from "@/app/prisma";
+import { AppError } from "../utils/appError";
 
 export const TripsService = {
   create: async function (data: Prisma.TripCreateInput) {
@@ -26,10 +27,15 @@ export const TripsService = {
         },
       });
     } catch (e) {
-      const { message, status } = mapPrismaError(e);
-
-      return Response.json({ message }, { status });
+      mapPrismaError(e);
     }
+  },
+
+  findOne: async (data: Partial<Prisma.TripWhereInput>, include?: Prisma.TripInclude) => {
+    return await prisma.trip.findFirst({
+      where: data,
+      include
+    });
   },
 
   findMany: async (
@@ -50,6 +56,6 @@ export const TripsService = {
     const end = new Date(endDate);
 
     if (start.getTime() > end.getTime())
-      return Response.json({ message: "Invalid date range" }, { status: 400 });
+      throw new AppError("Invalid date range", 400);
   },
 };

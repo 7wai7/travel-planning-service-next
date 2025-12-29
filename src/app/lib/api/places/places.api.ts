@@ -1,14 +1,13 @@
-import { Prisma } from "@prisma/client";
 import api from "../axios";
 import { fetcher } from "../fetcher";
-// import type { CreatePlaceInput, DeletePlaceInput, Place, UpdatePlaceInput } from "./places.types";
+import { CreatePlaceDTO, PlaceDTO, UpdatePlaceDTO } from "../../shared/types/place.dto";
 
-export const createPlaceApi = (data: Prisma.PlaceUncheckedCreateInput) =>
-  fetcher<Prisma.PlaceMaxAggregateOutputType>(api.post(`/places/${data.trip_id}`, data));
+export const createPlaceApi = (data: CreatePlaceDTO) =>
+  fetcher<PlaceDTO>(api.post(`/places/${data.trip_id}`, data));
 
-// export const updatePlaceApi = (data: UpdatePlaceInput) =>
-//   fetcher<Place>(api.put(`/places/${data.trip_id}/${data.id}`, data));
+// export const updatePlaceApi = (data: UpdatePlaceDTO) =>
+//   fetcher<PlaceDTO>(api.put(`/places/${data.trip_id}/${data.id}`, data));
 
 
-// export const deletePlaceApi = (data: DeletePlaceInput) =>
-//   fetcher<Place>(api.delete(`/places/${data.trip_id}/${data.id}`));
+export const deletePlaceApi = (data: DeletePlaceInput) =>
+  fetcher<Place>(api.delete(`/places/${data.trip_id}/${data.id}`));

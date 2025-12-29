@@ -1,17 +1,21 @@
-import { Prisma, Trip } from "@prisma/client";
 import api from "../axios";
 import { fetcher } from "../fetcher";
-import { InviteTripRequest } from "./trips.types";
+import {
+  CreateTripDTO,
+  InviteTripDTO,
+  TripDTO,
+  UpdateTripDTO,
+} from "../../shared/types/trip.dto";
 
-export const createTripApi = (data: Prisma.TripUncheckedCreateInput) =>
-  fetcher<Trip>(api.post("/trips", data));
+export const createTripApi = (data: CreateTripDTO) =>
+  fetcher<TripDTO>(api.post("/api/trips", data));
 
-export const editTripApi = async (data: Prisma.TripUncheckedUpdateInput) =>
-  fetcher<Trip>(api.put(`/trips/${data.id}`, data));
+export const editTripApi = async (data: UpdateTripDTO) =>
+  fetcher<TripDTO>(api.put(`/api/trips/${data.id}`, data));
 
 export const getMyTripsApi = async (include: string[] = []) =>
-  fetcher<Trip[]>(
-    api.get("/trips/my-trips", {
+  fetcher<TripDTO[]>(
+    api.get("/api/trips/my-trips", {
       params: { include },
       paramsSerializer: {
         indexes: null,
@@ -20,8 +24,8 @@ export const getMyTripsApi = async (include: string[] = []) =>
   );
 
 export const getTripByIdApi = async (id: number, include: string[] = []) =>
-  fetcher<Trip>(
-    api.get(`/trips/by-id/${id}`, {
+  fetcher<TripDTO>(
+    api.get(`/api/trips/${id}`, {
       params: { include },
       paramsSerializer: {
         indexes: null,
@@ -30,7 +34,7 @@ export const getTripByIdApi = async (id: number, include: string[] = []) =>
   );
 
 export const deleteTripApi = async (id: number) =>
-  fetcher(api.delete(`/trips/${id}`));
+  fetcher(api.delete(`/api/trips/${id}`));
 
-export const inviteTripApi = async ({ tripId, email }: InviteTripRequest) =>
-  fetcher(api.post(`/trips/${tripId}/access`, null, { params: { email } }));
+export const inviteTripApi = async ({ tripId, email }: InviteTripDTO) =>
+  fetcher(api.post(`/api/trips/${tripId}/access`, null, { params: { email } }));

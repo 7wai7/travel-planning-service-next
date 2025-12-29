@@ -1,15 +1,10 @@
 import { withErrorHandler } from "@/app/api/lib/withErrorHandler";
 import { TripsService } from "../../lib/services/trips.service";
 import { authGuard } from "../../auth/authGuard.guard";
-import { TokenUserData } from "../../lib/types/tokenUserData";
+import { TokenUserData } from "../../../lib/shared/types/tokenUserData";
 
-export const POST = withErrorHandler(
+export const GET = withErrorHandler(
   authGuard(async (req: Request, user: TokenUserData) => {
-    const { searchParams } = new URL(req.url);
-
-    const include = searchParams.get("include");
-    console.log("include", include)
-
     const trips = await TripsService.findMany(
       {
         tripParticipants: {
@@ -19,7 +14,7 @@ export const POST = withErrorHandler(
         },
       },
       {
-        // ...getPrismaInclude(include),
+        places: true,
         tripParticipants: {
           where: { user_id: user.id },
           select: { role: true },
@@ -27,16 +22,6 @@ export const POST = withErrorHandler(
       }
     );
 
-    console.log(trips)
-
     return Response.json(trips);
   })
 );
-
-function getPrismaInclude(include: string[]) {
-  const allowedIncludes = ["owner", "tripParticipants", "places"];
-
-  return Object.fromEntries(
-    allowedIncludes.map((key) => [key, include.includes(key)])
-  );
-}

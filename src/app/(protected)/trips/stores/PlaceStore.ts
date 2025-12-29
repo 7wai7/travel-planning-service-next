@@ -1,9 +1,9 @@
-import { Place } from "@prisma/client";
+import { PlaceDTO } from "@/app/lib/shared/types/place.dto";
 import { create } from "zustand";
 
 interface IEditState {
   isOpenModal: boolean;
-  editingPlace: Place | null;
+  editingPlace: PlaceDTO | null;
 }
 
 interface IPlaceState extends IEditState {

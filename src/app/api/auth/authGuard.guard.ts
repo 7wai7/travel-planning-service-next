@@ -1,5 +1,5 @@
 import { requireUser } from "@/app/lib/api/auth/requireUser";
-import { TokenUserData } from "../lib/types/tokenUserData";
+import { TokenUserData } from "../../lib/shared/types/tokenUserData";
 import { AppError } from "../lib/utils/appError";
 
 type AuthedHandler = (

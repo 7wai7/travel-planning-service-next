@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { AppError } from "./appError";
 
 type ErrorResponse = {
   message: string;
@@ -12,33 +13,31 @@ export function mapPrismaError(e: unknown): ErrorResponse {
       case "P2005":
       case "P2006":
       case "P2007":
-        return { message: "Invalid input", status: 400 };
+        throw new AppError("Invalid input", 400);
 
       case "P2002":
-        return { message: "Unique constraint failed", status: 400 };
+        throw new AppError("Unique constraint failed", 400);
 
       case "P2003":
       case "P2014":
-        return { message: "Relation constraint violation", status: 400 };
+        throw new AppError("Relation constraint violation", 400);
 
       case "P2025":
-        return { message: "Resource not found", status: 404 };
+        throw new AppError("Resource not found", 404);
 
       case "P2037":
-        return { message: "Database overloaded", status: 400 };
+        throw new AppError("Database overloaded", 400);
 
       default:
-        return { message: "Internal server error", status: 500 };
+        throw new AppError("Internal server error", 500);
     }
   }
 
-  if (e instanceof Prisma.PrismaClientValidationError) {
-    return { message: "Bad input", status: 400 };
-  }
+  if (e instanceof Prisma.PrismaClientValidationError)
+    throw new AppError("Bad input", 400);
 
-  return { message: "Internal server error", status: 500 };
+  throw new AppError("Internal server error", 500);
 }
-
 
 /**
  * === Prisma error codes ===

@@ -1,22 +1,19 @@
-import { Prisma } from "@prisma/client";
-import {
-    useMutation,
-    useQueryClient
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPlaceApi } from "../lib/api/places/places.api";
+import { CreatePlaceDTO, PlaceDTO } from "../lib/shared/types/place.dto";
 
 export function useCreatePlace() {
   const qc = useQueryClient();
 
-  return useMutation<Prisma.PlaceMaxAggregateOutputType, Error, Prisma.PlaceUncheckedCreateInput>({
+  return useMutation<PlaceDTO, Error, CreatePlaceDTO>({
     mutationFn: createPlaceApi,
-    onMutate: async (variables: Prisma.PlaceUncheckedCreateInput) => {
+    onMutate: async (variables: CreatePlaceDTO) => {
       await qc.cancelQueries({ queryKey: ["trip-page", variables.trip_id] });
     },
     onSettled: (
-      _data: Prisma.PlaceMaxAggregateOutputType | undefined,
+      _data: PlaceDTO | undefined,
       _error: Error | null,
-      variables: Prisma.PlaceUncheckedCreateInput
+      variables: CreatePlaceDTO
     ) => {
       qc.invalidateQueries({ queryKey: ["trip-page", variables.trip_id] });
     },

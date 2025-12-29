@@ -1,17 +1,18 @@
-import { Trip } from "@prisma/client";
 import { useTripPermissions } from "../hooks/useTripPermissions.hook";
 import { formatDateInput } from "../lib/utils/date";
 import usePlaceStore from "../(protected)/trips/stores/PlaceStore";
-
+import { TripDTO } from "../lib/shared/types/trip.dto";
+import { useTripPlaces } from "../hooks/useTripPlaces.hook";
+import PlaceItem from "./PlaceItem";
 
 interface Props {
-  trip: Trip;
+  trip: TripDTO;
 }
 
 export default function TripDetailsSection({ trip }: Props) {
   const setPlaceStore = usePlaceStore((s) => s.set);
-  const { canEditPlaces } = useTripPermissions(trip!);
-  // const { sortedPlaces, openAdd } = useTripPlaces(trip!);
+  const { canEditPlaces } = useTripPermissions(trip);
+  const { sortedPlaces, openAdd } = useTripPlaces(trip);
 
   return (
     <section className={`mt-2 bg-white py-3 px-4 rounded-2xl`}>
@@ -24,8 +25,8 @@ export default function TripDetailsSection({ trip }: Props) {
         <strong className="text-black">Dates: </strong>
         {trip.startDate && trip.endDate ? (
           <>
-            {/* {formatDateInput(trip.startDate)} &mdash;{" "}
-            {formatDateInput(trip.endDate)} */}
+            {formatDateInput(trip.startDate)} &mdash;{" "}
+            {formatDateInput(trip.endDate)}
           </>
         ) : (
           "-"
@@ -36,19 +37,19 @@ export default function TripDetailsSection({ trip }: Props) {
         <div className="flex justify-between items-center">
           <strong className="text-black">Places</strong>
           <div className="flex items-center gap-3">
-            {/* {canEditPlaces && (
+            {canEditPlaces && (
               <button className="interact py-2 px-3 rounded-lg bg-linear-to-b from-[#6c63ff] to-[#5748d8]" onClick={openAdd}>
                 + Add place
               </button>
-            )} */}
+            )}
             <span className="text-sm text-gray-500">
-              {/* {sortedPlaces.length}{" "}
-              {sortedPlaces.length === 1 ? "place" : "places"} */}
+              {sortedPlaces.length}{" "}
+              {sortedPlaces.length === 1 ? "place" : "places"}
             </span>
           </div>
         </div>
 
-        {/* {sortedPlaces.length === 0 ? (
+        {sortedPlaces.length === 0 ? (
           <div className="p-5 bg-(--bg) rounded-lg border border-blue-200 border-dashed mt-2.5">
             <p className="text-black mb-2">The trip hasn&apos;t places yet.</p>
             {canEditPlaces && (
@@ -72,7 +73,7 @@ export default function TripDetailsSection({ trip }: Props) {
               </li>
             ))}
           </ul>
-        )} */}
+        )}
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { requireUser } from "../lib/api/auth/requireUser";
 import UserInitializer from "./UserInitializer";
+import SideBar from "../components/SideBar";
 
 export default async function ProtectedLayout({
   children,
@@ -12,7 +13,12 @@ export default async function ProtectedLayout({
 
   return (
     <>
-      <UserInitializer>{children}</UserInitializer>
+      <UserInitializer>
+        <main className="ml-50 py-6 px-8 w-full flex flex-col">
+          {children}
+        </main>
+        <SideBar />
+      </UserInitializer>
     </>
   );
 }

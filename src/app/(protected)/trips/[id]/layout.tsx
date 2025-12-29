@@ -13,10 +13,7 @@ export default function TripLayout({
   const params = useParams();
   const tripId = Number(params.id);
 
-  const { data: trip, isLoading, error } = useQueryTrip(tripId, [
-    "places",
-    "tripParticipants",
-  ]);
+  const { data: trip, isLoading, error } = useQueryTrip(tripId, ["places"]);
 
   if (isLoading) return <LoadingSpinner />;
 
@@ -29,8 +26,6 @@ export default function TripLayout({
   }
 
   return (
-    <TripContext.Provider value={{ trip }}>
-      {children}
-    </TripContext.Provider>
+    <TripContext.Provider value={{ trip }}>{children}</TripContext.Provider>
   );
 }

@@ -1,6 +1,6 @@
-import { Trip } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMyTripsApi, getTripByIdApi } from "../lib/api/trips/trips.api";
+import { createTripApi, deleteTripApi, editTripApi, getMyTripsApi, getTripByIdApi, inviteTripApi } from "../lib/api/trips/trips.api";
+import { InviteTripDTO, TripDTO } from "../lib/shared/types/trip.dto";
 
 export function useQueryTrip(tripId: number, include: string[] = []) {
   return useQuery({
@@ -18,43 +18,43 @@ export function useGetMyTrips(include: string[] = []) {
   });
 }
 
-// export function useCreateTrip() {
-//   const qc = useQueryClient();
+export function useCreateTrip() {
+  const qc = useQueryClient();
 
-//   return useMutation({
-//     mutationFn: createTripApi,
-//     onSuccess: (data: Trip) => {
-//       qc.setQueryData<Trip[] | undefined>(["my-trips-list"], (prev) =>
-//         prev ? [data, ...prev] : [data]
-//       );
-//     },
-//   });
-// }
+  return useMutation({
+    mutationFn: createTripApi,
+    onSuccess: (data: TripDTO) => {
+      qc.setQueryData<TripDTO[] | undefined>(["my-trips-list"], (prev) =>
+        prev ? [data, ...prev] : [data]
+      );
+    },
+  });
+}
 
-// export function useDeleteTrip() {
-//   return useMutation({
-//     mutationFn: deleteTripApi,
-//   });
-// }
+export function useDeleteTrip() {
+  return useMutation({
+    mutationFn: deleteTripApi,
+  });
+}
 
-// export function useEditTrip() {
-//   const qc = useQueryClient();
+export function useEditTrip() {
+  const qc = useQueryClient();
 
-//   return useMutation({
-//     mutationFn: editTripApi,
-//     onSuccess: (data: Trip) => {
-//       qc.invalidateQueries({ queryKey: ["my-trips-list"] });
-//       qc.invalidateQueries({ queryKey: ["trip-page", data.id] });
-//     },
-//   });
-// }
+  return useMutation({
+    mutationFn: editTripApi,
+    onSuccess: (data: TripDTO) => {
+      qc.invalidateQueries({ queryKey: ["my-trips-list"] });
+      qc.invalidateQueries({ queryKey: ["trip-page", data.id] });
+    },
+  });
+}
 
-// export function useInviteTrip() {
-//   return useMutation<
-//     { token: string; inviteLink: string },
-//     Error,
-//     InviteTripRequest
-//   >({
-//     mutationFn: inviteTripApi,
-//   });
-// }
+export function useInviteTrip() {
+  return useMutation<
+    { token: string; inviteLink: string },
+    Error,
+    InviteTripDTO
+  >({
+    mutationFn: inviteTripApi,
+  });
+}

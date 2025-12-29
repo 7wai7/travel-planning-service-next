@@ -9,7 +9,6 @@ export async function requireUser() {
 
   try {
     const payload = verify(token, env.JWT_SECRET) as TokenUserData;
-    console.log("payload", payload)
 
     return {
       id: payload.id,

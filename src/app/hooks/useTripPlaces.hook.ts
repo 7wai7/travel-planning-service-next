@@ -1,11 +1,12 @@
-import { Prisma, Trip } from "@prisma/client";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import usePlaceStore from "../(protected)/trips/stores/PlaceStore";
 import { useCreatePlace } from "./places.hooks";
+import { CreateTripDTO, TripDTO, UpdateTripDTO } from "../lib/shared/types/trip.dto";
+import { CreatePlaceDTO, UpdatePlaceDTO } from "../lib/shared/types/place.dto";
 
 
-export function useTripPlaces(trip: Prisma.TripWhereInput) {
+export function useTripPlaces(trip: TripDTO) {
   const qc = useQueryClient();
   const setPlace = usePlaceStore((s) => s.set);
 
@@ -27,13 +28,13 @@ export function useTripPlaces(trip: Prisma.TripWhereInput) {
     
     openAdd: () => setPlace({ editingPlace: null, isOpenModal: true }),
 
-    create: async (data: Omit<Prisma.PlaceUncheckedCreateInput, "trip_id">) => {
+    create: async (data: Omit<CreatePlaceDTO, "trip_id">) => {
       await create.mutateAsync({ ...data, trip_id: trip.id });
       invalidate();
       setPlace({ isOpenModal: false });
     },
 
-    update: async (data: Omit<Prisma.PlaceUncheckedUpdateInput, "trip_id">) => {
+    update: async (data: Omit<UpdatePlaceDTO, "trip_id">) => {
       // await update.mutateAsync({ ...data, trip_id: trip.id });
       invalidate();
       setPlace({ editingPlace: null, isOpenModal: false });
