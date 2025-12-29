@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 60%);
   --foreground: #171717;
 }
 
@@ -13,14 +13,33 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
+  /* :root {
+    --background: linear-gradient(180deg, #03031f 0%, #030c1f 60%);
     --foreground: #ededed;
-  }
+  } */
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@layer base {
+  .form-element {
+    @apply border border-gray-200
+         transition duration-300 ease-in-out hover:border-blue-500 rounded-lg cursor-pointer;
+  }
+
+  .interact {
+    @apply border border-transparent transition duration-300 ease-in-out hover:border-blue-500 rounded-lg cursor-pointer;
+  }
+
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/75 flex items-center justify-center z-50;
+  }
+
+  .modal {
+    @apply bg-white rounded-2xl;
+  }
 }
