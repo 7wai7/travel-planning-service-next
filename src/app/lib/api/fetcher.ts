@@ -10,11 +10,12 @@ export async function fetcher<T>(
   } catch (err: unknown) {
     if (axios.isAxiosError(err)) {
       if (err.response) {
-        console.error(err.response);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const message = (err.response.data as any)?.message ?? "Server error";
+
         // помилка з сервера
-        throw err.response.data;
+        throw new Error(message);
       } else {
-        console.error(err.message);
         // мережна помилка або таймаут
         throw new Error(err.message);
       }

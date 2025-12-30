@@ -1,8 +1,8 @@
-import { useTripPermissions } from "../hooks/useTripPermissions.hook";
+import { useTripPermissions } from "../hooks/useTripPermissions.hooks";
 import { formatDateInput } from "../lib/shared/utils/date";
 import usePlaceStore from "../(protected)/trips/stores/PlaceStore";
 import { TripDTO } from "../lib/shared/types/trip.dto";
-import { useTripPlaces } from "../hooks/useTripPlaces.hook";
+import { useTripPlaces } from "../hooks/useTripPlaces.hooks";
 import PlaceItem from "./PlaceItem";
 
 interface Props {

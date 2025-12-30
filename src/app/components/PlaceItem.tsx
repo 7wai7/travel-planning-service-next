@@ -1,4 +1,4 @@
-import { useTripPlaces } from "../hooks/useTripPlaces.hook";
+import { useTripPlaces } from "../hooks/useTripPlaces.hooks";
 import { PlaceDTO } from "../lib/shared/types/place.dto";
 import { TripDTO } from "../lib/shared/types/trip.dto";
 import useConfirmDialogStore from "../stores/ConfirmDialogStore";

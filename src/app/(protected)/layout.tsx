@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { requireUser } from "../lib/api/auth/requireUser";
+import { requireUser } from "../lib/shared/utils/requireUser";
 import UserInitializer from "./UserInitializer";
 import SideBar from "../components/SideBar";
 import TripModal from "../components/TripModal";

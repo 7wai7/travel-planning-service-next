@@ -8,7 +8,7 @@ interface IEditState {
   error?: Error | null;
   isOpen: boolean;
   onCancel: (() => void) | null;
-  onConfirm: (() => void) | null;
+  onConfirm: (() => Promise<unknown>) | null;
 }
 
 interface IState extends IEditState {

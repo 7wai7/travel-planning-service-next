@@ -1,14 +1,14 @@
-import { Trip } from "@prisma/client";
+import { TripDTO } from "@/app/lib/shared/types/trip.dto";
 import { create } from "zustand";
 
 interface IEditState {
   isOpenModal: boolean;
-  editingTrip: Trip | null;
+  editingTrip: TripDTO | null;
 }
 
 interface ITripsState extends IEditState {
   openCreate: () => void;
-  openEdit: (t: Trip) => void;
+  openEdit: (t: TripDTO) => void;
   close: () => void;
   setTripsStore: (values: Partial<IEditState>) => void;
 }
@@ -18,7 +18,7 @@ const useTripsStore = create<ITripsState>((set) => ({
   editingTrip: null,
 
   openCreate: () => set({ isOpenModal: true, editingTrip: null }),
-  openEdit: (t: Trip) => set({ isOpenModal: true, editingTrip: t }),
+  openEdit: (t: TripDTO) => set({ isOpenModal: true, editingTrip: t }),
   close: () => set({ isOpenModal: false, editingTrip: null }),
   setTripsStore: (values) => set(values),
 }));

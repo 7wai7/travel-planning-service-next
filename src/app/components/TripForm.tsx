@@ -2,7 +2,7 @@
 
 import React from "react";
 import AutoResizeTextarea from "./ui/AutoResizeTextarea";
-import type { UiState } from "../hooks/useTripModal";
+import type { UiState } from "../hooks/useTripModal.hooks";
 
 type Props = {
   ui: UiState;

@@ -3,7 +3,7 @@ import { AppError } from "./utils/appError";
 import { Handler } from "./types/context";
 
 export const withErrorHandler =
-  <P,>(handler: Handler<P>): Handler<P> =>
+  (handler: Handler): Handler =>
   async (req, ctx) => {
     try {
       return await handler(req, ctx);

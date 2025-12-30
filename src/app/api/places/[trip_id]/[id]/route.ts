@@ -15,9 +15,7 @@ export const PUT = withErrorHandler(
         if (Number.isNaN(id)) throw new AppError("Id must be a number", 400);
 
         const data = await req.json();
-        delete data.id
-        console.log("update", data);
-
+        delete data.id;
         const place = await PlacesService.update(id, data);
         return Response.json(place);
       }

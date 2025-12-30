@@ -2,7 +2,7 @@
 
 import Modal from "./ui/Modal";
 import TripForm from "./TripForm";
-import { useTripModal } from "../hooks/useTripModal";
+import { useTripModal } from "../hooks/useTripModal.hooks";
 
 export default function TripModal() {
   const {

@@ -4,10 +4,10 @@ import { TripRole } from '@prisma/client';
 import { Handler } from "../lib/types/context";
 
 export const tripRoleGuard =
-  <P extends { trip_id: string, id: string }>(
+  (
     requiredRoles: TripRole[],
-    handler: Handler<P>
-  ): Handler<P> =>
+    handler: Handler
+  ): Handler =>
   async (req, ctx) => {
     const params = await ctx.params;
     const tripId = Number(params.trip_id);

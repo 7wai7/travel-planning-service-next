@@ -31,10 +31,13 @@ export const TripsService = {
     }
   },
 
-  findOne: async (data: Partial<Prisma.TripWhereInput>, include?: Prisma.TripInclude) => {
+  findOne: async (
+    data: Partial<Prisma.TripWhereInput>,
+    include?: Prisma.TripInclude
+  ) => {
     return await prisma.trip.findFirst({
       where: data,
-      include
+      include,
     });
   },
 
@@ -49,6 +52,16 @@ export const TripsService = {
         createdAt: "desc",
       },
     });
+  },
+
+  deleteById: async (ownerId: number, id: number) => {
+    try {
+      return await prisma.trip.delete({
+        where: { owner_id: ownerId, id },
+      });
+    } catch (e) {
+      mapPrismaError(e);
+    }
   },
 
   checkDateRange: (startDate: string | Date, endDate: string | Date) => {

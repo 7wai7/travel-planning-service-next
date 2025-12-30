@@ -1,6 +1,6 @@
-import type { Trip } from "../services/api/trips/trips.types";
+import { TripDTO } from "../lib/shared/types/trip.dto";
 
-export function useTripPermissions(trip: Trip) {
+export function useTripPermissions(trip: TripDTO) {
   const role = trip.tripParticipants?.[0].role ?? "USER";
 
   return {

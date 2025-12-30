@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react";
-import { useCreateTrip, useEditTrip } from "../hooks/trips.hooks";
+import { useCreateTrip, useEditTrip } from "./trips.hooks";
 import { toDateInputValue } from "../lib/shared/utils/date";
 import useTripsStore from "../(protected)/trips/stores/TripsStore";
 

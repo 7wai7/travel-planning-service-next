@@ -2,9 +2,11 @@
 
 import AddEditPlaceModal from "@/app/components/AddEditPlaceModal";
 import TripDetailsSection from "@/app/components/TripDetailsSection";
-import { useTrip } from "@/app/hooks/useTrip.hook";
-import { useTripPlaces } from "@/app/hooks/useTripPlaces.hook";
+import { useTrip } from "@/app/hooks/useTrip.hooks";
 import usePlaceStore from "../stores/PlaceStore";
+import TripHeader from "@/app/components/TripHeader";
+import PlacesAnimation from "@/app/components/PlacesAnimation";
+import { useTripPlaces } from "@/app/hooks/useTripPlaces.hooks";
 
 
 export default function TripPage() {
@@ -13,9 +15,9 @@ export default function TripPage() {
 
   return (
     <>
-      {/* <TripHeader trip={trip} />
+      <TripHeader trip={trip} />
 
-      <PlacesAnimation places={sortedPlaces} /> */}
+      <PlacesAnimation places={sortedPlaces} />
 
       <TripDetailsSection trip={trip} />
 
