@@ -1,8 +1,8 @@
 import { env } from "@/app/config/env";
-import { JwtUserPayload } from "@/app/lib/types/Auth";
+import { TokenUserData } from "@/app/lib/shared/types/tokenUserData.dto";
 import jwt, { SignOptions } from "jsonwebtoken";
 
-export function signToken(user: JwtUserPayload) {
+export function signToken(user: TokenUserData) {
   const options: SignOptions = {};
 
   if (env.JWT_EXPIRES_IN) {

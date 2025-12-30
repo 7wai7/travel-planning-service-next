@@ -1,5 +1,5 @@
 import { useTripPermissions } from "../hooks/useTripPermissions.hook";
-import { formatDateInput } from "../lib/utils/date";
+import { formatDateInput } from "../lib/shared/utils/date";
 import usePlaceStore from "../(protected)/trips/stores/PlaceStore";
 import { TripDTO } from "../lib/shared/types/trip.dto";
 import { useTripPlaces } from "../hooks/useTripPlaces.hook";
@@ -38,7 +38,7 @@ export default function TripDetailsSection({ trip }: Props) {
           <strong className="text-black">Places</strong>
           <div className="flex items-center gap-3">
             {canEditPlaces && (
-              <button className="interact py-2 px-3 rounded-lg bg-linear-to-b from-[#6c63ff] to-[#5748d8]" onClick={openAdd}>
+              <button className="interact py-2 px-3 bg-blue-100 hover:bg-blue-200 border-blue-300 hover:border-blue-600" onClick={openAdd}>
                 + Add place
               </button>
             )}
@@ -53,7 +53,7 @@ export default function TripDetailsSection({ trip }: Props) {
           <div className="p-5 bg-(--bg) rounded-lg border border-blue-200 border-dashed mt-2.5">
             <p className="text-black mb-2">The trip hasn&apos;t places yet.</p>
             {canEditPlaces && (
-              <button className="interact py-2 px-3 rounded-lg bg-linear-to-b from-[#6c63ff] to-[#5748d8]" onClick={openAdd}>
+              <button className="interact py-2 px-3 bg-blue-100 hover:bg-blue-200 border-blue-300 hover:border-blue-600" onClick={openAdd}>
                 Add first place
               </button>
             )}

@@ -3,7 +3,6 @@ import { PlaceDTO } from "../lib/shared/types/place.dto";
 import { TripDTO } from "../lib/shared/types/trip.dto";
 import useConfirmDialogStore from "../stores/ConfirmDialogStore";
 
-
 type Props = {
   trip: TripDTO;
   place: PlaceDTO;
@@ -20,6 +19,7 @@ export default function PlaceItem({
   onDelete,
 }: Props) {
   const setConfirm = useConfirmDialogStore((s) => s.setConfirm);
+  const reset = useConfirmDialogStore((s) => s.reset);
   const { remove } = useTripPlaces(trip);
 
   const handleDeletePlaceConfirm = () => {
@@ -30,18 +30,23 @@ export default function PlaceItem({
         "Are you sure you want to delete this place? This action cannot be undone.",
       subject: "place",
       payload: place.id,
-      onConfirm: async () => await remove(place.id),
+      onConfirm: async () =>
+        remove(place.id).then(reset).catch((e) => setConfirm({ error: e })),
     });
   };
 
   return (
     <div className="flex justify-between items-center bg-blue-50 rounded-2xl p-3">
       <div className="flex flex-row">
-        <div className="font-bold text-black mb-1.5 text-nowrap">Day {place.dayNumber}</div>
+        <div className="font-bold text-black mb-1.5 text-nowrap">
+          Day {place.dayNumber}
+        </div>
         <hr className={`h-7 border-r border-r-gray-400 mx-4`} />
         <div>
           <div className="text-black">{place.locationName}</div>
-          {place.notes && <div className="mt-1.5 text-sm text-gray-500">{place.notes}</div>}
+          {place.notes && (
+            <div className="mt-1.5 text-sm text-gray-500">{place.notes}</div>
+          )}
         </div>
       </div>
 

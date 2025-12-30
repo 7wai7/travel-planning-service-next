@@ -1,11 +1,11 @@
-import { TokenUserData } from "@/app/lib/api/auth/auth.types";
 import { authGuard } from "../../auth/authGuard.guard";
 import { TripsService } from "../../lib/services/trips.service";
 import { AppError } from "../../lib/utils/appError";
 import { withErrorHandler } from "../../lib/withErrorHandler";
+import NextRequestUser from "../../lib/types/nextRequestUser";
 
 export const GET = withErrorHandler(
-  authGuard(async (req: Request, user: TokenUserData) => {
+  authGuard(async (req: NextRequestUser) => {
     const url = new URL(req.url);
     const pathParts = url.pathname.split("/");
     const idParam = pathParts[pathParts.length - 1];
@@ -19,7 +19,7 @@ export const GET = withErrorHandler(
       {
         places: true,
         tripParticipants: {
-            where: { user_id: user.id },
+            where: { user_id: req.user!.id },
           select: { role: true },
         },
       }

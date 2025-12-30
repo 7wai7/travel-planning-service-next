@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPlaceApi } from "../lib/api/places/places.api";
-import { CreatePlaceDTO, PlaceDTO } from "../lib/shared/types/place.dto";
+import { createPlaceApi, deletePlaceApi, updatePlaceApi } from "../lib/api/places/places.api";
+import { CreatePlaceDTO, DeletePlaceDTO, PlaceDTO, UpdatePlaceDTO } from "../lib/shared/types/place.dto";
 
 export function useCreatePlace() {
   const qc = useQueryClient();
@@ -20,14 +20,14 @@ export function useCreatePlace() {
   });
 }
 
-// export function useUpdatePlace() {
-//   return useMutation<Prisma.PlaceMaxAggregateOutputType, Error, UpdatePlaceInput>({
-//     mutationFn: updatePlaceApi,
-//   });
-// }
+export function useUpdatePlace() {
+  return useMutation<PlaceDTO, Error, UpdatePlaceDTO>({
+    mutationFn: updatePlaceApi,
+  });
+}
 
-// export function useDeletePlace() {
-//   return useMutation<Place, Error, DeletePlaceInput>({
-//     mutationFn: deletePlaceApi,
-//   });
-// }
+export function useDeletePlace() {
+  return useMutation<PlaceDTO, Error, DeletePlaceDTO>({
+    mutationFn: deletePlaceApi,
+  });
+}

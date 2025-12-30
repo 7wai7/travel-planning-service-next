@@ -1,15 +1,15 @@
 import { withErrorHandler } from "@/app/api/lib/withErrorHandler";
 import { TripsService } from "./../lib/services/trips.service";
 import { authGuard } from "./../auth/authGuard.guard";
-import { TokenUserData } from "../../lib/shared/types/tokenUserData";
+import NextRequestUser from "../lib/types/nextRequestUser";
 
 export const POST = withErrorHandler(
-  authGuard(async (req: Request, user: TokenUserData) => {
+  authGuard(async (req: NextRequestUser) => {
     const data = await req.json();
 
     const trip = await TripsService.create({
       ...data,
-      owner: { connect: { id: user.id } },
+      owner: { connect: { id: req.user!.id } },
     });
 
     return Response.json(trip, { status: 201 });

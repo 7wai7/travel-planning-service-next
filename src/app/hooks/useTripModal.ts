@@ -1,7 +1,9 @@
+"use client"
+
 import { useEffect, useMemo, useState } from "react";
 import { useCreateTrip, useEditTrip } from "../hooks/trips.hooks";
-import useTripsStore from "../stores/TripsStore";
-import { toDateInputValue } from "../utils/date";
+import { toDateInputValue } from "../lib/shared/utils/date";
+import useTripsStore from "../(protected)/trips/stores/TripsStore";
 
 export type UiState = {
   title: string;

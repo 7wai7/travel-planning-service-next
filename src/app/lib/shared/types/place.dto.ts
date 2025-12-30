@@ -9,4 +9,9 @@ export type PlaceDTO = {
   id: number;
 } & CreatePlaceDTO;
 
-export type UpdatePlaceDTO = Partial<CreatePlaceDTO>
+export type UpdatePlaceDTO = { id: number } & Partial<CreatePlaceDTO>;
+
+export type DeletePlaceDTO = {
+  id: number;
+  trip_id: number;
+};

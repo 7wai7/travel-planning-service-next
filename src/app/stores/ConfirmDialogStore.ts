@@ -5,6 +5,7 @@ interface IEditState {
   description: string | null;
   subject: string | null;
   payload?: unknown;
+  error?: Error | null;
   isOpen: boolean;
   onCancel: (() => void) | null;
   onConfirm: (() => void) | null;
@@ -31,6 +32,7 @@ const useConfirmDialogStore = create<IState>((set) => ({
       description: null,
       subject: null,
       payload: null,
+      error: null,
       isOpen: false,
       onCancel: null,
       onConfirm: null,

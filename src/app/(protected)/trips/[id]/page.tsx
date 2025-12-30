@@ -1,12 +1,15 @@
 "use client"
 
+import AddEditPlaceModal from "@/app/components/AddEditPlaceModal";
 import TripDetailsSection from "@/app/components/TripDetailsSection";
 import { useTrip } from "@/app/hooks/useTrip.hook";
+import { useTripPlaces } from "@/app/hooks/useTripPlaces.hook";
+import usePlaceStore from "../stores/PlaceStore";
 
 
 export default function TripPage() {
   const { trip } = useTrip();
-  // const { sortedPlaces, create, update } = useTripPlaces(trip);
+  const { sortedPlaces, create, update } = useTripPlaces(trip);
 
   return (
     <>
@@ -16,7 +19,7 @@ export default function TripPage() {
 
       <TripDetailsSection trip={trip} />
 
-      {/* <AddEditPlaceModal
+      <AddEditPlaceModal
         onSubmit={async (values) => {
           const { editingPlace } = usePlaceStore.getState();
 
@@ -27,7 +30,7 @@ export default function TripPage() {
             await create({ ...values, dayNumber: dayNum });
           }
         }}
-      /> */}
+      />
     </>
   );
 }

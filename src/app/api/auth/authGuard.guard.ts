@@ -1,19 +1,13 @@
 import { requireUser } from "@/app/lib/api/auth/requireUser";
-import { TokenUserData } from "../../lib/shared/types/tokenUserData";
 import { AppError } from "../lib/utils/appError";
-
-type AuthedHandler = (
-  req: Request,
-  user: TokenUserData
-) => Promise<Response>;
-
-type RouteHandler = (req: Request) => Promise<Response>;
+import { Handler } from "../lib/types/context";
 
 export const authGuard =
-  (handler: AuthedHandler): RouteHandler =>
-  async (req) => {
+  <P,>(handler: Handler<P>): Handler<P> =>
+  async (req, ctx) => {
     const user = await requireUser();
     if (!user) throw new AppError("Unauthorized", 401);
 
-    return handler(req, user);
+    req.user = user;
+    return handler(req, ctx);
   };

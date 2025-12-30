@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import { useQueryClient } from "@tanstack/react-query";
-import { formatDateInput } from "../lib/utils/date";
+import { formatDateInput } from "../lib/shared/utils/date";
 import { useRouter } from "next/navigation";
 import { TripDTO } from "../lib/shared/types/trip.dto";
 import { PlaceDTO } from "../lib/shared/types/place.dto";
@@ -30,7 +30,7 @@ export default function TripItem({ trip }: Props) {
 
   return (
     <div
-      className="flex flex-col animate-anim items-start bg-white rounded-xl py-3 px-4 shadow-[-0.2rem_0_0_0_var(--blue)] cursor-pointer"
+      className="flex flex-col items-start bg-white rounded-xl py-3 px-4 shadow-[-0.2rem_0_0_0] shadow-blue-500 bg-linear-to-r from-blue-100 to-blue-50 bg-size-[0%_100%] bg-no-repeat transition-[background-size] duration-300 ease-out hover:bg-size-[100%_100%] cursor-pointer"
       onClick={onClick}
     >
       <div className="w-full">
@@ -79,7 +79,7 @@ function PlacesList({ places }: { places: PlaceDTO[] }) {
         <span key={p.id} className="text-(--muted) text-[0.9rem] relative">
           {p.locationName}
           {i < places.length - 1 && (
-            <span className="mx-1 text-[1.2rem] leading-none text-(--blue)">
+            <span className="mx-1 text-[1.2rem] leading-none text-blue-500">
               •
             </span>
           )}

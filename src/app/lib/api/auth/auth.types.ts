@@ -12,9 +12,3 @@ export type User = {
   username: string;
   email: string;
 };
-
-export type TokenUserData = {
-  id: number;
-  username: string;
-  email: string;
-};

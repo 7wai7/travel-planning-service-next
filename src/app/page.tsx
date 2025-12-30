@@ -13,9 +13,14 @@ export default function Home() {
         all in one simple and intuitive interface.
       </p>
 
-      <Link href="/trips" className="py-2 px-6 bg-blue-500 mx-auto text-white text-center font-sans rounded-lg transition-colors duration-200 ease hover:bg-blue-700">
+      <div className="flex flex-row gap-10 justify-center w-full">
+        <Link href="/trips" className="py-2 px-6 bg-blue-50 hover:bg-blue-200 border border-blue-200 hover:border-blue-600 text-blue-600 text-center font-sans rounded-lg transition-colors duration-200 ease">
         View my trips
       </Link>
+      <Link href="/auth" className="py-2 px-6 bg-green-50 hover:bg-green-200 border border-green-200 hover:border-green-600 text-green-600 text-center font-sans rounded-lg transition-colors duration-200 ease">
+        Login
+      </Link>
+      </div>
     </main>
     </>
   );

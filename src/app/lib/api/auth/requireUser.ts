@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { verify } from "jsonwebtoken";
 import { env } from "@/app/config/env";
-import { TokenUserData } from "./auth.types";
+import { TokenUserData } from "../../shared/types/tokenUserData.dto";
 
 export async function requireUser() {
   const token = (await cookies()).get("token")?.value;
