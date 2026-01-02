@@ -31,7 +31,7 @@ export default function PlaceItem({
       subject: "place",
       payload: place.id,
       onConfirm: async () =>
-        remove(place.id).then(reset).catch((e) => setConfirm({ error: e })),
+        remove(place.id).then(reset),
     });
   };
 

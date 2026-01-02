@@ -30,14 +30,13 @@ export default function TripHeader({ trip }: Props) {
         "Delete entire trip and all places? This action cannot be undone.",
       subject: "trip",
       payload: trip.id,
-      onConfirm: () => {
-        return deleteTrip.mutateAsync(trip.id, {
+      onConfirm: () =>
+        deleteTrip.mutateAsync(trip.id, {
           onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["trips-list"] });
             router.push("/trips");
           },
-        });
-      },
+        }),
     });
   };
 
