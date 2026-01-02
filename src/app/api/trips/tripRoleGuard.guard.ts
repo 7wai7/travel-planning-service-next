@@ -10,7 +10,7 @@ export const tripRoleGuard =
   ): Handler =>
   async (req, ctx) => {
     const params = await ctx.params;
-    const tripId = Number(params.trip_id);
+    const tripId = Number(params.trip_id ?? params.id);
     if (Number.isNaN(tripId))
       throw new AppError("Trip id must be a number", 400);
 
